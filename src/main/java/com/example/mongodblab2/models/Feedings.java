@@ -12,10 +12,7 @@ import java.time.LocalDate;
 
 @Document(collection = "feedings")
 @CompoundIndex(def="{'food':1, 'quantity':-1}", unique = true, background = false, sparse = false)
-
-public class Feedings {
-    @Id
-    private ObjectId id;
+public class Feedings extends BaseEnity{
     @Field(name="feedingDate")
     @Indexed(unique = true, sparse = true, direction = IndexDirection.ASCENDING, background = false)
     private LocalDate date;
@@ -25,19 +22,10 @@ public class Feedings {
     private int quantity;
     public Feedings(){}
 
-    public Feedings(ObjectId id, LocalDate date, String food, int quantity) {
-        this.id = id;
+    public Feedings(LocalDate date, String food, int quantity) {
         this.date = date;
         this.food = food;
         this.quantity = quantity;
-    }
-
-    public ObjectId getId() {
-        return id;
-    }
-
-    public void setId(ObjectId id) {
-        this.id = id;
     }
 
     public LocalDate getDate() {
@@ -67,8 +55,7 @@ public class Feedings {
     @Override
     public String toString() {
         return "Feedings{" +
-                "id='" + id + '\'' +
-                ", date=" + date +
+                "date=" + date +
                 ", food='" + food + '\'' +
                 ", quantity=" + quantity +
                 '}';

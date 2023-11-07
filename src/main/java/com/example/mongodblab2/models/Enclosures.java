@@ -10,9 +10,7 @@ import org.springframework.data.mongodb.core.mapping.Field;
 
 @Document(collection = "enclosures")
 @CompoundIndex(def="{'name':1, 'type':-1}", unique = true, background = false, sparse = false)
-public class Enclosures {
-    @Id
-    private ObjectId id;
+public class Enclosures extends BaseEnity{
     @Field(name="enclosuresName")
     @Indexed(unique = true, sparse = true, direction = IndexDirection.ASCENDING, background = false)
     private String name;
@@ -37,16 +35,25 @@ public class Enclosures {
         public int getVolume() {
             return volume;
         }
-
+            
         public void setVolume(int volume) {
             this.volume = volume;
         }
     }
 
     public static class Animal {
+        private Long id;
         private String name;
         private String species;
         private int age;
+
+        public Long getId() {
+            return id;
+        }
+
+        public void setId(Long id) {
+            this.id = id;
+        }
 
         public String getName() {
             return name;
@@ -74,21 +81,12 @@ public class Enclosures {
     }
     Enclosures(){}
 
-    public Enclosures(ObjectId id, String name, String type, String food, Size size, Animal[] animals) {
-        this.id = id;
+    public Enclosures(String name, String type, String food, Size size, Animal[] animals) {
         this.name = name;
         this.type = type;
         this.food = food;
         this.size = size;
         this.animals = animals;
-    }
-
-    public ObjectId getId() {
-        return id;
-    }
-
-    public void setId(ObjectId id) {
-        this.id = id;
     }
 
     public String getName() {

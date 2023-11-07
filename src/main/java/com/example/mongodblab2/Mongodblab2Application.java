@@ -51,9 +51,8 @@ public class Mongodblab2Application {
         @Override
         public void run(String... args) throws Exception {
             Random random = new Random();
-
+            Long id = 1L;
             for (int i = 1; i <= 10; i++) {
-                ObjectId id = new ObjectId();
                 String name = "Вольер №" + i;
                 String type = randomType();
                 String food = randomFood();
@@ -65,42 +64,21 @@ public class Mongodblab2Application {
                 EnclosuresDto.AnimalDto[] animals = new EnclosuresDto.AnimalDto[3];
                 for (int j = 0; j < 3; j++) {
                     animals[j] = new EnclosuresDto.AnimalDto();
+                    animals[j].setId(id++);
                     animals[j].setName(randomAnimalName());
                     animals[j].setSpecies(randomAnimalSpecies());
                     animals[j].setAge(random.nextInt(18) + 1);
                 }
 
-                EnclosuresDto enclosure = new EnclosuresDto(new ObjectId(), name, type, food, size, animals);
+                EnclosuresDto enclosure = new EnclosuresDto(null, name, type, food, size, animals);
                 enclosuresService.createEnclosures(enclosure);
             }
-            /*EnclosuresDto.SizeDto size = new EnclosuresDto.SizeDto();
-            size.setArea(random.nextInt(500) + 100);
-            size.setVolume(random.nextInt(1000) + 500);
-
-            EnclosuresDto.AnimalDto[] animal = new EnclosuresDto.AnimalDto[1];
-            animal[0] = new EnclosuresDto.AnimalDto();
-            animal[0].setAge(10);
-            animal[0].setName("Адольф");
-            animal[0].setSpecies("Тигре");
-            EnclosuresDto enclosure = new EnclosuresDto(new ObjectId(), "Вальер№1", "Закрытый", "Мясо", size, animal);
-            enclosuresService.createEnclosures(enclosure);
-            enclosure.setName("Владимир");
-            enclosuresService.updateEnclosures(enclosure);
-
-
-            FeedingsDto feedings = new FeedingsDto(new ObjectId(), LocalDate.now(), "Meat", 100);
-            System.out.println(feedings.getId());
-            feedingsService.createFeedings(feedings);
-            feedings.setFood("Мясо");
-            System.out.println(feedings.getId());
-            feedingsService.updateFeedings(feedings);
-            System.out.println(feedings.getId());*/
 
             for (int i = 0; i < 10; i++) {
                 LocalDate now = LocalDate.now();
                 String food =  randomFood();
                 int quantity = random.nextInt(100) + 1;
-                FeedingsDto feedings = new FeedingsDto(new ObjectId(), now, food, quantity);
+                FeedingsDto feedings = new FeedingsDto(null, now, food, quantity);
                 feedingsService.createFeedings(feedings);
             }
         }
