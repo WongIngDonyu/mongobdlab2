@@ -35,16 +35,16 @@ public class EnclosuresDto {
     }
 
     public static class AnimalDto {
-        private Long id;
+        private ObjectId id;
         private String name;
         private String species;
         private int age;
 
-        public Long getId() {
+        public ObjectId getId() {
             return id;
         }
 
-        public void setId(Long id) {
+        public void setId(ObjectId id) {
             this.id = id;
         }
 

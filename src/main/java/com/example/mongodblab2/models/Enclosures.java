@@ -41,19 +41,10 @@ public class Enclosures extends BaseEnity{
         }
     }
 
-    public static class Animal {
-        private Long id;
+    public static class Animal extends BaseEnity{
         private String name;
         private String species;
         private int age;
-
-        public Long getId() {
-            return id;
-        }
-
-        public void setId(Long id) {
-            this.id = id;
-        }
 
         public String getName() {
             return name;

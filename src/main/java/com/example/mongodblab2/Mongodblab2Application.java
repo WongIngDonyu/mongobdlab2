@@ -51,7 +51,6 @@ public class Mongodblab2Application {
         @Override
         public void run(String... args) throws Exception {
             Random random = new Random();
-            Long id = 1L;
             for (int i = 1; i <= 10; i++) {
                 String name = "Вольер №" + i;
                 String type = randomType();
@@ -64,7 +63,7 @@ public class Mongodblab2Application {
                 EnclosuresDto.AnimalDto[] animals = new EnclosuresDto.AnimalDto[3];
                 for (int j = 0; j < 3; j++) {
                     animals[j] = new EnclosuresDto.AnimalDto();
-                    animals[j].setId(id++);
+                    animals[j].setId(new ObjectId());
                     animals[j].setName(randomAnimalName());
                     animals[j].setSpecies(randomAnimalSpecies());
                     animals[j].setAge(random.nextInt(18) + 1);
